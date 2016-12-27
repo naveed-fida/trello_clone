@@ -7,5 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "NF",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "backbone": "^1.3.3",
+    "handlebars": "^4.0.6",
+    "jquery": "^3.1.1"
+  }
 }
