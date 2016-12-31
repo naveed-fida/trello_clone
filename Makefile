@@ -1,21 +1,36 @@
-typescripts := $(shell find ./javascripts/src -name "*.ts")
-javascripts := $(patsubst %.ts,%.js,$(typescripts))
+javascripts := $(shell find ./javascripts/src -name "*.js")
 app := javascripts/src/app.js
 app_bundled := javascripts/app.js
 styl := $(wildcard assets/css/*.styl)
 css := $(patsubst %.styl,%.css,$(styl))
+hbs_files := $(wildcard handlebars/*.hbs)
+hbs_templates := $(patsubst %.hbs,%.js,$(hbs_files))
 
-all: $(app) $(css)
+all: $(app_bundled) $(css) 
+
+.PHONY: all handlebars browserify stylus
+handlebars: $(hbs_templates)
+browserify: $(app_bundled)
+stylus: $(css)
 
 $(app_bundled): $(javascripts)
-	browserify -d $(app) -o $@
-
-$(javascripts): %.js: %.ts
-	tsc $<
+	@echo "Running browserify...."
+	@browserify -d $(app) -o $@
+	@echo "Done browserify...."
 
 $(css): %.css: %.styl
-	stylus -w $< -o $@
-	
+	@echo "Running Stylus...."
+	@stylus -w $< -o $@
+	@echo "Done Stylus...."
+
+$(hbs_templates): %.js: %.hbs
+	@echo "Running Handlebars...."
+	@handlebars $< -c handlebars -f $@
+	@echo "Done Handlebars...."
+
 clean:
-	rm -f $(app) $(javascripts) $(css)
+	@echo "Running Clean...."
+	@rm -f $(app) $(css) $(hbs_templates)
+	@echo "Done Clean...."
+
 
