@@ -1,16 +1,11 @@
-let Backbone = include('backbone');
+var Backbone = require('backbone');
 
-let Card = Backbone.Model.extend({
+var Card = Backbone.Model.extend({
   defaults: {
     title: "A Card",
     description: "",
     labels: [],
     due_date: undefined
-  },
-
-  constructor() {
-    Backbone.Model.apply(this, arguments);
-    this.set('order', this.collection.nextOrder());
   }
 });
 

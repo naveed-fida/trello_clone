@@ -1,26 +1,26 @@
-javascripts := $(shell find ./javascripts/src -name "*.js")
-app := javascripts/src/app.js
-app_bundled := javascripts/app.js
-styl := $(wildcard assets/css/*.styl)
-css := $(patsubst %.styl,%.css,$(styl))
 hbs_files := $(wildcard handlebars/*.hbs)
 hbs_templates := $(patsubst %.hbs,%.js,$(hbs_files))
+javascripts := $(shell find ./javascripts/src -name "*.js") $(hbs_templates)
+app := javascripts/src/app.js
+app_bundled := javascripts/bundle.js
+styl := $(wildcard assets/css/*.styl)
+css := $(patsubst %.styl,%.css,$(styl))
 
-all: $(app_bundled) $(css) 
+all: $(handlebars) $(app_bundled) $(css) 
 
-.PHONY: all handlebars browserify stylus
+.PHONY: handlebars browserify stylus
 handlebars: $(hbs_templates)
 browserify: $(app_bundled)
 stylus: $(css)
 
 $(app_bundled): $(javascripts)
 	@echo "Running browserify...."
-	@browserify -d $(app) -o $@
+	@browserify $(app) --debug | exorcist $(patsubst %.js,%.map.js,$@) > $@
 	@echo "Done browserify...."
 
 $(css): %.css: %.styl
 	@echo "Running Stylus...."
-	@stylus -w $< -o $@
+	@stylus $< -o $@
 	@echo "Done Stylus...."
 
 $(hbs_templates): %.js: %.hbs
@@ -30,7 +30,5 @@ $(hbs_templates): %.js: %.hbs
 
 clean:
 	@echo "Running Clean...."
-	@rm -f $(app) $(css) $(hbs_templates)
+	@rm -f $(app_bundled) $(css) $(hbs_templates) javascripts/*.map.js
 	@echo "Done Clean...."
-
-
