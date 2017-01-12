@@ -1,0 +1,38 @@
+<header>
+  <h1>{{title}}</h1>
+  <p>in list <a href="#">{{list.title}}</a></p>
+</header>
+{{#if labels.[0]}}
+<div class="modal_labels">
+    <h3>Labels</h3>
+  {{#each labels}}
+    <span class="{{label}}"></span>
+  {{/each}}
+    <a class="button add_labels"></a>  
+</div>
+{{/if}}
+
+<div class="modal_description">
+  {{#if description}}
+    <h3>Description <a class="edit_description" href="#">Edit</a><h3>
+  {{else}}
+    <h3><a class="edit_description" href="#">Edit Description</a><h3>
+  {{/if}}
+  <div class="description_area" style="display: none;">
+    <textarea></textarea>
+    <p></p>
+    <a href="#" class="button save_description">Save</a>
+    <a href="#" class="button cancel fa fa-close fa-2x"></a>
+  </div>
+</div>
+
+<div class="modal_comments">
+  <h2>Add Comment</h2>
+  <textarea placeholder="Write a comment..."></textarea>
+  <a class="button cmnt_send">Send</a>
+  <ul>
+    {{#each comments}}
+    <li>{{.}}</li>
+    {{/each}}
+  </ul>
+</div>

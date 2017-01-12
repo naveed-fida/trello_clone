@@ -1,13 +1,19 @@
 @import 'https://fonts.googleapis.com/css?family=Roboto';
 @import "whitespace-reset.css";
+@import "font-awesome.min.css";
 body {
-  background: #d29034;
   font: normal normal 14px "Roboto", Arial, Helvetica, sans-serif;
-  color: #555;
+  color: #4d4d4d;
+  min-height: 100vh;
 }
 body #main {
-  padding: 15px;
-  overflow: hidden;
+  padding: 20px;
+  white-space: nowrap;
+  margin-top: 40px;
+}
+body #main h3 {
+  font-size: 18px;
+  margin-bottom: 20px;
 }
 body a {
   text-decoration: none;
@@ -17,24 +23,153 @@ body a {
   background: #e2e4e6;
   width: 300px;
   border-radius: 4px;
-  overflow: auto;
-  float: left;
-  margin: 0 15px 0 0;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 15px 15px 0;
+}
+.list .new_card {
+  display: none;
+  padding: 0 10px 10px 10px;
+}
+.list .new_card textarea {
+  display: block;
+  width: 100%;
+  resize: none;
+  box-sizing: border-box;
+  height: 80px;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0px 1px 1px #ccc;
+  outline: none;
+  padding: 10px;
+  margin-bottom: 10px;
+  font: normal normal 14px "Roboto", Arial, Helvetica, sans-serif;
+  color: inherit;
+}
+.list.add_mode .add_card {
+  display: none;
+}
+.list.add_mode .new_card {
+  display: block;
+}
+.list .button {
+  display: inline-block;
+}
+.list .button.add {
+  width: 50px;
+  background: #5bae45;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  margin-right: 5px;
+}
+.list .button.cancel {
+  vertical-align: middle;
+}
+.list .button.cancel:hover {
+  color: #333;
+  background: transparent;
 }
 .list ul {
   padding: 0 10px 0 10px;
+}
+.list ul .sort_placeholder {
+  background: #ccc;
+  height: 30px;
 }
 .list h2 {
   font-size: 16px;
   padding: 10px;
 }
-.list li {
+.list li.card {
   padding: 10px;
   background: #fff;
   box-sizing: border-box;
   margin-bottom: 8px;
   border-radius: 4px;
   box-shadow: 0px 1px 1px #ccc;
+  cursor: pointer;
+  position: relative;
+}
+.list li.card .info span {
+  margin-top: 10px;
+  display: inline-block;
+  padding: 0 5px;
+}
+.list li.card .info span:first-child {
+  border-radius: 3px;
+  color: #fff;
+  margin-right: 10px;
+}
+.list li.card .info span:first-child i {
+  margin-right: 5px;
+}
+.list li.card > span.fa-pencil {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  visibility: hidden;
+}
+.list li.card > span.fa-pencil:hover {
+  background: #e0e0e0;
+}
+.list li.card:hover {
+  background: #eee;
+}
+.list li.card:hover span {
+  visibility: visible;
+}
+.list li.card .edit_card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 435px;
+}
+.list li.card .edit_card .form {
+  float: left;
+}
+.list li.card .edit_card .form textarea {
+  display: block;
+  width: 100%;
+  resize: none;
+  box-sizing: border-box;
+  height: 80px;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0px 1px 1px #ccc;
+  outline: none;
+  padding: 10px;
+  margin-bottom: 10px;
+  font: normal normal 14px "Roboto", Arial, Helvetica, sans-serif;
+  color: inherit;
+  height: 120px;
+  width: 280px;
+}
+.list li.card .edit_card .form .save {
+  background: #5bae45;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  width: 80px;
+}
+.list li.card .edit_card .edit_actions {
+  float: right;
+}
+.list li.card .edit_card .edit_actions a {
+  background: rgba(10,10,10,0.7);
+  color: #fff;
+  width: auto;
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+.list li.card .edit_card .edit_actions a span {
+  margin-right: 10px;
 }
 .list a {
   display: block;
@@ -44,4 +179,287 @@ body a {
 }
 .list a:hover {
   background: #cdd2d4;
+}
+.placeholder {
+  background: #ccc;
+}
+#header {
+  background: #026aa7;
+  height: 40px;
+  padding: 5px 8px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+#header .menu_elem {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0, rgba(255,255,255,0.3) 100%);
+  height: 30px;
+  vertical-align: middle;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  border-radius: 3px;
+}
+#header .menu_elem:hover {
+  background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0, rgba(255,255,255,0.3) 100%);
+}
+#header .menu_elem#search {
+  width: 180px;
+  border: none;
+  margin-left: 10px;
+}
+#header .button {
+  font-weight: bold;
+  color: #fff;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 5;
+  background: rgba(0,0,0,0.6);
+  display: none;
+}
+.pop_over {
+  display: none;
+  position: absolute;
+  padding: 15px;
+  z-index: 11;
+  background: #fff;
+}
+.pop_over.is_shown {
+  display: block;
+}
+.pop_over .pop_over_header {
+  border-bottom: 1px solid #ccc;
+  padding: 0 0 10px 0;
+}
+.pop_over .pop_over_header h3 {
+  text-align: center;
+}
+.pop_over .pop_over_body {
+  padding: 10px 0 10px 0;
+}
+.pop_over ul {
+  list-style: none;
+}
+.pop_over ul.color_list li {
+  height: 30px;
+  width: 220px;
+  margin-top: 5px;
+  border-radius: 4px;
+  position: relative;
+  color: #fff;
+  cursor: pointer;
+}
+.pop_over ul.color_list li span {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+}
+.labels span {
+  display: inline-block;
+  width: 40px;
+  height: 8px;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+.green {
+  background: #61bd4f;
+}
+.yellow {
+  background: #f2d600;
+}
+.orange {
+  background: #ffab4a;
+}
+.red {
+  background: #eb5a46;
+}
+.purple {
+  background: #c377e0;
+}
+.blue {
+  background: #0079bf;
+}
+input.date_format {
+  width: 120px;
+  height: 35px;
+  border-radius: 4px;
+  background: #eee;
+  border: 1px solid #ccc;
+}
+input.date_format:hover,
+input.date_format:focus {
+  border: 1px solid #00f;
+  background: #fff;
+}
+.ui-datepicker {
+  margin-top: 20px;
+  height: auto;
+}
+.ui-datepicker table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #bbb;
+  margin-bottom: 10px;
+}
+.ui-datepicker table tr {
+  border-bottom: 1px solid #bbb;
+}
+.ui-datepicker table tbody tr:last-child {
+  border-bottom: 0px;
+}
+.ui-datepicker table td,
+.ui-datepicker table th {
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  width: 35px;
+  height: 30px;
+  border-right: 1px solid #bbb;
+}
+.ui-datepicker table td:last-child {
+  border-right: 0px;
+}
+.ui-datepicker table th {
+  background: #f4f5f6;
+  height: 25px;
+}
+.ui-datepicker table td:hover {
+  background: #bbb;
+}
+.ui-datepicker table td a {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  padding-top: 7px;
+}
+.ui-datepicker-header {
+  margin-bottom: 5px;
+}
+.ui-datepicker-header a {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.ui-datepicker-title {
+  text-align: center;
+}
+.ui-datepicker-prev {
+  float: left;
+}
+.ui-datepicker-next {
+  float: right;
+}
+.ui-datepicker-month,
+.ui-datepicker-year {
+  cursor: pointer;
+}
+.save_date {
+  background: #5bae45;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  width: 70px;
+  float: left;
+  padding: 8px 15px;
+}
+.remove_date {
+  background: #5bae45;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  width: 70px;
+  padding: 8px 15px;
+  float: right;
+  background: #bababa;
+  color: #f41a12;
+}
+.modal {
+  display: none;
+  z-index: 10;
+}
+.modal.is_shown {
+  display: block;
+  position: absolute;
+  top: 20px;
+  width: 700px;
+  height: 600px;
+  left: 50%;
+  margin-left: -300px;
+  background: #efefef;
+  border-radius: 4px;
+  padding: 20px;
+}
+.modal.is_shown h1 {
+  font-size: 20px;
+  padding-bottom: 10px;
+}
+.modal.is_shown h2 {
+  padding-bottom: 10px;
+  font-size: 18px;
+}
+.modal > div div,
+.modal header {
+  padding: 20px 0;
+}
+.modal header {
+  padding-top: 0;
+}
+.modal textarea {
+  display: block;
+  width: 100%;
+  resize: none;
+  box-sizing: border-box;
+  height: 80px;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0px 1px 1px #ccc;
+  outline: none;
+  padding: 10px;
+  margin-bottom: 10px;
+  font: normal normal 14px "Roboto", Arial, Helvetica, sans-serif;
+  color: inherit;
+  width: 450px;
+}
+.modal .cmnt_send {
+  background: #5bae45;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+  padding: 8px 30px;
+  cursor: pointer;
+}
+.modal .cmnt_send.disabled {
+  color: #000;
+  background: #ccc;
+  cursor: default;
+}
+.modal .modal_labels span {
+  display: inline-block;
+  width: 60;
+  height: 40px;
+}
+.modal .description_area .save_description {
+  background: #5bae45;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+  padding: 8px 20px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.modal .description_area .cancel {
+  font-weight: normal;
+  vertical-align: middle;
 }

@@ -3,7 +3,6 @@ var Backbone   = require('backbone')
 
 var Cards = Backbone.Collection.extend({
   model: Card,
-  url: "/list"
 });
 
 module.exports = Cards;

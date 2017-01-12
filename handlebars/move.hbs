@@ -1,0 +1,18 @@
+<div class="pop_over_header">
+  <h3>Move Card</h3>
+</div>
+
+<div class="pop_over_body">
+  <select class="list_select">
+    {{#each lists}}
+      {{#if current}}
+      <option value="{{id}}" selected>{{title}} (current)</option>
+      {{else}}
+      <option value="{{id}}">{{title}}</option>
+      {{/if}}      
+    {{/each}}
+  </select>
+  <select class="position_select">
+  </select>
+  <a href="#" class="button move">Move</a>
+</div>

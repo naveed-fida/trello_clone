@@ -1,1 +1,15 @@
+<div class="labels">
+  {{#each labels}}
+  <span class="{{.}}"></span>
+  {{/each}}
+</div>
 <p>{{title}}</p>
+<div class="info">
+  {{#if due_date}}
+    <span class="date yellow"><i class="fa fa-clock-o"></i>{{format_date_small due_date}}</span>
+  {{/if}}
+  {{#if description}}
+    <span class="fa fa-align-left"></span>
+  {{/if}}
+</div>
+<span class="fa fa-pencil"></span>
