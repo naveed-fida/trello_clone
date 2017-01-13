@@ -37,13 +37,13 @@ var ChangeDueDateView = Backbone.View.extend({
     var due_date = this.$('.date_picker').datepicker('getDate');
     console.log(due_date.toString());
     this.model.set('due_date', +due_date);
-    $('.overlay').trigger('click');
+    this.trigger('due_date_changed')
   },
 
   removeDate(e) {
     e.preventDefault();
     this.model.set('due_date', undefined);
-    $('.overlay').trigger('click');
+    this.trigger('due_date_changed')
   }
 });
 

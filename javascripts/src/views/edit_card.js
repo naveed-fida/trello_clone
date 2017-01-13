@@ -77,6 +77,7 @@ var EditCardView = Backbone.View.extend({
 
     if (this.sub_edit_class !== "move_card") {
       this.sub_edit_view = new MoveView({ model: this.model });
+      this.listenTo(this.sub_edit_view, "card_moved", this.removeEdit)
       this.sub_edit_class = "move_card"
       this.showSubEdit(e.target);
     } else {
@@ -90,6 +91,7 @@ var EditCardView = Backbone.View.extend({
 
     if (this.sub_edit_class !== "copy_card") {
       this.sub_edit_view = new CopyView({ model: this.model });
+      this.listenTo(this.sub_edit_view, 'card_copied', this.removeEdit);
       this.sub_edit_class = "copy_card";
       this.showSubEdit(e.target);
     } else {
@@ -103,6 +105,7 @@ var EditCardView = Backbone.View.extend({
 
     if (this.sub_edit_class !== "change_due_date") {
       this.sub_edit_view = new ChangeDueDateView({ model: this.model });
+      this.listenTo(this.sub_edit_view, 'due_date_changed', this.removeSubView);
       this.sub_edit_class = "change_due_date";
       this.showSubEdit(e.target);
     } else {
@@ -128,11 +131,16 @@ var EditCardView = Backbone.View.extend({
     this.$popover.offset(coords);
   },
 
+  removeEdit() {
+    this.remove();
+    this.removeSubView();
+  },
+
   updateCard() {
     var title = this.$('textarea').val().trim();
     if (!title) return;
     this.model.set('title', title);
-    this.remove();
+    this.removeEdit();
   },
 
   handleEnter(e) {

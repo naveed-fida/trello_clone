@@ -9,7 +9,7 @@ require('../../../handlebars/edit_labels');
 
 var EditLabelsView = Backbone.View.extend({
   template: Handlebars.templates['edit_labels.hbs'],
-  'className': 'edit_label',
+  'className': 'edit_labels',
   events: {
     'click li': 'toggleLabel'
   },

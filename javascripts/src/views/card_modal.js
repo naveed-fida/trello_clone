@@ -73,8 +73,8 @@ CardModalView = Backbone.View.extend({
       this.hideDescArea()
       return;
     }
-    e.preventDefault();
-    e.stopPropagation();
+
+    this.prepActionView(e);
     this.$desc_area.show();
     this.$desc_text.val(this.model.get('description'))
                    .focus()[0].select();
@@ -82,10 +82,7 @@ CardModalView = Backbone.View.extend({
   },
 
   editLabels(e) {
-    e.preventDefault();
-    this.hideDescArea();
-    e.stopPropagation();
-    this.removeAction();
+    this.prepActionView(e);
 
     if (this.action_type !== "edit_labels") {
       this.action_view = new EditLabelsView({
@@ -100,13 +97,11 @@ CardModalView = Backbone.View.extend({
   },
 
   copyCard(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    this.hideDescArea();
-    this.removeAction();
+    this.prepActionView(e);
 
     if (this.action_type !== "copy_card") {
       this.action_view = new CopyView({ model: this.model });
+      this.listenTo(this.action_view, 'card_copied', this.removeAction);
       this.action_type = "copy_card";
       this.showAction(e.target);
     } else {
@@ -115,13 +110,11 @@ CardModalView = Backbone.View.extend({
   },
 
   moveCard(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    this.hideDescArea();
-    this.removeAction();
+    this.prepActionView(e);
 
     if (this.action_type !== "move_card") {
       this.action_view = new MoveView({ model: this.model });
+      this.listenTo(this.action_view, 'card_moved', this.removeAction);
       this.action_type = "move_card"
       this.showAction(e.target);
     } else {
@@ -130,13 +123,11 @@ CardModalView = Backbone.View.extend({
   },
 
   changeDueDate(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    this.hideDescArea();
-    this.removeAction();
+    this.prepActionView(e);
 
     if (this.action_type !== "change_due_date") {
       this.action_view = new ChangeDueDateView({ model: this.model });
+      this.listenTo(this.action_view, 'due_date_changed', this.removeAction);
       this.action_type = "change_due_date";
       this.showAction(e.target);
     } else {
@@ -146,19 +137,26 @@ CardModalView = Backbone.View.extend({
 
   removeCard(e) {
     e.preventDefault();
-    this.removeModal();
     this.model.collection.remove(this.model);
+    this.removeModal();
   },
 
   removeModal(e) {
-    this.remove();
     this.removeAction();
+    this.remove();
   },
 
   hideDescArea() {
     this.$desc_area.hide();
     this.$desc_p.text(this.model.get('description'));
     this.$desc_p.show();
+  },
+
+  prepActionView(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.hideDescArea();
+    this.removeAction();
   },
 
   removeAction() {

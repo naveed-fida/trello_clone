@@ -60,8 +60,7 @@ var MoveView = Backbone.View.extend({
       , list      = lists.get(+this.$('.list_select').val());
 
     list.cards.add(model, {at: position});
-
-    $('.overlay').trigger('click').trigger('click');
+    this.trigger('card_moved');
   },
 });
 

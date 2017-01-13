@@ -58,9 +58,7 @@ var CopyView = Backbone.View.extend({
       , list      = lists.get(+this.$('.list_select').val());
 
     list.cards.add(this.model.clone(), { at: position });
-
-    $('.overlay').trigger('click').trigger('click');
-    console.log(lists.toJSONAll());
+    this.trigger('card_copied');
   },
 });
 
