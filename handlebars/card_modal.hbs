@@ -1,38 +1,59 @@
-<header>
-  <h1>{{title}}</h1>
-  <p>in list <a href="#">{{list.title}}</a></p>
-</header>
-{{#if labels.[0]}}
-<div class="modal_labels">
-    <h3>Labels</h3>
-  {{#each labels}}
-    <span class="{{label}}"></span>
-  {{/each}}
-    <a class="button add_labels"></a>  
-</div>
-{{/if}}
+<div class="modal">
+  <div class="main">  
+    <header>
+      <h1>{{title}}</h1>
+      <p>in list <a href="#">{{list.title}}</a></p>
+    </header>
+    {{#if labels.[0]}}
+    <div class="modal_labels">
+        <h3>Labels</h3>
+      <section>
+      {{#each labels}}
+        <span class="{{.}}"></span>
+      {{/each}}
+        <a href="#" class="button add_labels fa fa-plus"></a>  
+      </section>
+    </div>
+    {{/if}}
 
-<div class="modal_description">
-  {{#if description}}
-    <h3>Description <a class="edit_description" href="#">Edit</a><h3>
-  {{else}}
-    <h3><a class="edit_description" href="#">Edit Description</a><h3>
-  {{/if}}
-  <div class="description_area" style="display: none;">
-    <textarea></textarea>
-    <p></p>
-    <a href="#" class="button save_description">Save</a>
-    <a href="#" class="button cancel fa fa-close fa-2x"></a>
+    <div class="modal_description">
+      {{#if description}}
+        <h3>Description <a class="edit_description" href="#">Edit</a></h3>
+      {{else}}
+        <h3><a class="edit_description" href="#">Edit Description</a></h3>
+      {{/if}}
+      <div class="description_area" style="display: none;">
+        <textarea id="description_text"></textarea>
+        <a href="#" class="button save_description">Save</a>
+        <a href="#" class="button cancel fa fa-close fa-2x"></a>
+      </div>
+      {{#if description}}
+      <p>{{description}}</p>
+      {{/if}}
+    </div>
+
+    <div class="modal_comments">
+      <h2>Add Comment</h2>
+      <textarea id="cmnt_text" placeholder="Write a comment..."></textarea>
+      <a class="button cmnt_send">Send</a>
+      <ul>
+        {{#each comments}}
+        <li><span>{{.}}</span></li>
+        {{/each}}
+      </ul>
+    </div>
   </div>
-</div>
-
-<div class="modal_comments">
-  <h2>Add Comment</h2>
-  <textarea placeholder="Write a comment..."></textarea>
-  <a class="button cmnt_send">Send</a>
-  <ul>
-    {{#each comments}}
-    <li>{{.}}</li>
-    {{/each}}
-  </ul>
+  <div class="panel">
+    <div class="add_actions">
+      <h2>Add</h2>
+      <a href="#"><span class="fa fa-flag-o"></span> &nbsp; Labels</a>
+      <a href="#"><span class="fa fa-clock-o"></span> &nbsp; Date</a>
+    </div>
+    <div class="other_actions">
+      <h2>Actions</h2>
+      <a href="#"><span class="fa fa fa-long-arrow-right"></span> &nbsp; Move</a>
+      <a href="#"><span class="fa fa-copy"></span> &nbsp; Copy</a>
+      <a href="#"><span class="fa fa-trash-o"></span> &nbsp; Remove</a>
+    </div>
+  </div>
 </div>

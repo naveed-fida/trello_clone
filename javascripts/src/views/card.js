@@ -17,9 +17,8 @@ let CardView = Backbone.View.extend({
   },
 
   initialize() {
-    this.$overlay = $('.overlay');
-    this.$modal = $('.modal');
     this.listenTo(this.model, 'change', this.render);
+    this.listenTo(this.model, 'comment_added', this.render);
   },
 
   render() {
@@ -29,46 +28,18 @@ let CardView = Backbone.View.extend({
 
   openEdit(e) {
     e.stopPropagation();
-    this.edit_view = new EditCardView({
+    var edit_view = new EditCardView({
       model: this.model,
       card_view: this
     });
-    this.listenTo(this.edit_view, 'update', this.updateCard);
-    this.$el.append(this.edit_view.render().$el);
-    this.edit_view.$('textarea').focus()[0].select();
-    this.$overlay.show();
-    this.$overlay.on('click', this.closeEdit.bind(this));
-  },
-
-  closeEdit() {
-    var $pop_over = $('.pop_over');
-    if ($pop_over.is('.is_shown')) {
-      this.trigger('hide_pop');
-      return;
-    }
-    $('.overlay').off().hide();
-    this.edit_view.remove();
-    this.render();
-  },
-
-  updateCard(options) {
-    this.model.set('title', options.title);
-    this.closeEdit();
+    $(document.body).append(edit_view.render().$el);
+    edit_view.$('.form textarea').focus()[0].select();
   },
 
   openCardModal() {
-    this.modal_view = new CardModalView({ model: this.model });
-    this.$overlay.show();
-    this.$modal.html(this.modal_view.render().$el);
-    this.$modal.addClass('is_shown')
-    this.$overlay.on('click', this.closeCardModal.bind(this));
+    var modal_view = new CardModalView({ model: this.model });
+    $(document.body).append(modal_view.render().$el);
   },
-
-  closeCardModal() {
-    this.modal_view.remove();
-    this.$overlay.off().hide();
-    this.$modal.removeClass('is_shown').removeAttr('style');
-  }
 });
 
 module.exports = CardView;

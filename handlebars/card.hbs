@@ -9,7 +9,10 @@
     <span class="date yellow"><i class="fa fa-clock-o"></i>{{format_date_small due_date}}</span>
   {{/if}}
   {{#if description}}
-    <span class="fa fa-align-left"></span>
+    <span class="fa fa-align-left desc"></span>
   {{/if}}
+  {{#if comments.[0]}}
+    <span><i class="fa fa-comment-o"></i> {{comments.length}}</span>
+  {{/if}}  
 </div>
 <span class="fa fa-pencil"></span>

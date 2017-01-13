@@ -9,7 +9,13 @@ templates['card.hbs'] = template({"1":function(container,depth0,helpers,partials
     + container.escapeExpression((helpers.format_date_small || (depth0 && depth0.format_date_small) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.due_date : depth0),{"name":"format_date_small","hash":{},"data":data}))
     + "</span>\n";
 },"5":function(container,depth0,helpers,partials,data) {
-    return "    <span class=\"fa fa-align-left\"></span>\n";
+    return "    <span class=\"fa fa-align-left desc\"></span>\n";
+},"7":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "    <span><i class=\"fa fa-comment-o\"></i> "
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.comments : depth0)) != null ? stack1.length : stack1), depth0))
+    + "</span>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {};
 
@@ -20,6 +26,7 @@ templates['card.hbs'] = template({"1":function(container,depth0,helpers,partials
     + "</p>\n<div class=\"info\">\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.due_date : depth0),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.description : depth0),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.comments : depth0)) != null ? stack1["0"] : stack1),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "</div>\n<span class=\"fa fa-pencil\"></span>";
 },"useData":true});
 
@@ -28,37 +35,43 @@ var Handlebars = require("handlebars");  var template = Handlebars.template, tem
 templates['card_modal.hbs'] = template({"1":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "<div class=\"modal_labels\">\n    <h3>Labels</h3>\n"
+  return "    <div class=\"modal_labels\">\n        <h3>Labels</h3>\n      <section>\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.labels : depth0),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    <a class=\"button add_labels\"></a>  \n</div>\n";
+    + "        <a href=\"#\" class=\"button add_labels fa fa-plus\"></a>  \n      </section>\n    </div>\n";
 },"2":function(container,depth0,helpers,partials,data) {
-    var helper;
-
-  return "    <span class=\""
-    + container.escapeExpression(((helper = (helper = helpers.label || (depth0 != null ? depth0.label : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"label","hash":{},"data":data}) : helper)))
+    return "        <span class=\""
+    + container.escapeExpression(container.lambda(depth0, depth0))
     + "\"></span>\n";
 },"4":function(container,depth0,helpers,partials,data) {
-    return "    <h3>Description <a class=\"edit_description\" href=\"#\">Edit</a><h3>\n";
+    return "        <h3>Description <a class=\"edit_description\" href=\"#\">Edit</a></h3>\n";
 },"6":function(container,depth0,helpers,partials,data) {
-    return "    <h3><a class=\"edit_description\" href=\"#\">Edit Description</a><h3>\n";
+    return "        <h3><a class=\"edit_description\" href=\"#\">Edit Description</a></h3>\n";
 },"8":function(container,depth0,helpers,partials,data) {
-    return "    <li>"
+    var helper;
+
+  return "      <p>"
+    + container.escapeExpression(((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"description","hash":{},"data":data}) : helper)))
+    + "</p>\n";
+},"10":function(container,depth0,helpers,partials,data) {
+    return "        <li><span>"
     + container.escapeExpression(container.lambda(depth0, depth0))
-    + "</li>\n";
+    + "</span></li>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=container.escapeExpression;
 
-  return "<header>\n  <h1>"
+  return "<div class=\"modal\">\n  <div class=\"main\">  \n    <header>\n      <h1>"
     + alias2(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
-    + "</h1>\n  <p>in list <a href=\"#\">"
+    + "</h1>\n      <p>in list <a href=\"#\">"
     + alias2(container.lambda(((stack1 = (depth0 != null ? depth0.list : depth0)) != null ? stack1.title : stack1), depth0))
-    + "</a></p>\n</header>\n"
+    + "</a></p>\n    </header>\n"
     + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.labels : depth0)) != null ? stack1["0"] : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\n<div class=\"modal_description\">\n"
+    + "\n    <div class=\"modal_description\">\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.description : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.program(6, data, 0),"data":data})) != null ? stack1 : "")
-    + "  <div class=\"description_area\" style=\"display: none;\">\n    <textarea></textarea>\n    <p></p>\n    <a href=\"#\" class=\"button save_description\">Save</a>\n    <a href=\"#\" class=\"button cancel fa fa-close fa-2x\"></a>\n  </div>\n</div>\n\n<div class=\"modal_comments\">\n  <h2>Add Comment</h2>\n  <textarea placeholder=\"Write a comment...\"></textarea>\n  <a class=\"button cmnt_send\">Send</a>\n  <ul>\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.comments : depth0),{"name":"each","hash":{},"fn":container.program(8, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "  </ul>\n</div>";
+    + "      <div class=\"description_area\" style=\"display: none;\">\n        <textarea id=\"description_text\"></textarea>\n        <a href=\"#\" class=\"button save_description\">Save</a>\n        <a href=\"#\" class=\"button cancel fa fa-close fa-2x\"></a>\n      </div>\n"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.description : depth0),{"name":"if","hash":{},"fn":container.program(8, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    </div>\n\n    <div class=\"modal_comments\">\n      <h2>Add Comment</h2>\n      <textarea id=\"cmnt_text\" placeholder=\"Write a comment...\"></textarea>\n      <a class=\"button cmnt_send\">Send</a>\n      <ul>\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.comments : depth0),{"name":"each","hash":{},"fn":container.program(10, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "      </ul>\n    </div>\n  </div>\n  <div class=\"panel\">\n    <div class=\"add_actions\">\n      <h2>Add</h2>\n      <a href=\"#\"><span class=\"fa fa-flag-o\"></span> &nbsp; Labels</a>\n      <a href=\"#\"><span class=\"fa fa-clock-o\"></span> &nbsp; Date</a>\n    </div>\n    <div class=\"other_actions\">\n      <h2>Actions</h2>\n      <a href=\"#\"><span class=\"fa fa fa-long-arrow-right\"></span> &nbsp; Move</a>\n      <a href=\"#\"><span class=\"fa fa-copy\"></span> &nbsp; Copy</a>\n      <a href=\"#\"><span class=\"fa fa-trash-o\"></span> &nbsp; Remove</a>\n    </div>\n  </div>\n</div>";
 },"useData":true});
 
 },{"handlebars":58}],3:[function(require,module,exports){
@@ -102,9 +115,9 @@ var Handlebars = require("handlebars");  var template = Handlebars.template, tem
 templates['edit_card.hbs'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "<div class=\"form\">\n  <textarea>"
+  return "<div class=\"edit_card\">\n  <div class=\"form\">\n    <textarea>"
     + container.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"title","hash":{},"data":data}) : helper)))
-    + "</textarea>\n  <a href=\"#\" class=\"button save\">Save</a>\n</div>\n<div class=\"edit_actions\">\n  <a href=\"#\"><span class=\"fa fa-pencil-square-o\"></span>Edit Labels</a>\n  <a href=\"#\"><span class=\"fa fa-arrows\"></span>Move</a>\n  <a href=\"#\"><span class=\"fa fa-copy\"></span>Copy</a>\n  <a href=\"#\"><span class=\"fa fa-clock-o\"></span>Change Due Date</a>\n  <a href=\"#\"><span class=\"fa fa-trash-o\"></span>Remove</a>\n</div>";
+    + "</textarea>\n    <a href=\"#\" class=\"button save\">Save</a>\n  </div>\n  <div class=\"edit_actions\">\n    <a href=\"#\"><span class=\"fa fa-flag-o\"></span>Edit Labels</a>\n    <a href=\"#\"><span class=\"fa fa-long-arrow-right\"></span>Move</a>\n    <a href=\"#\"><span class=\"fa fa-copy\"></span>Copy</a>\n    <a href=\"#\"><span class=\"fa fa-clock-o\"></span>Change Due Date</a>\n    <a href=\"#\"><span class=\"fa fa-trash-o\"></span>Remove</a>\n  </div>\n</div>";
 },"useData":true});
 
 },{"handlebars":58}],6:[function(require,module,exports){
@@ -250,7 +263,7 @@ global.App = {
 list1 = {
   title: "List 1",
   cards: [
-    { title: "List 1, Card 1",},
+    { title: "List 1, Card 1", description: "Hello", labels: ["yellow", "green"]},
     { title: "List 1, Card 2",}
   ]
 };
@@ -383,9 +396,8 @@ let CardView = Backbone.View.extend({
   },
 
   initialize() {
-    this.$overlay = $('.overlay');
-    this.$modal = $('.modal');
     this.listenTo(this.model, 'change', this.render);
+    this.listenTo(this.model, 'comment_added', this.render);
   },
 
   render() {
@@ -395,74 +407,62 @@ let CardView = Backbone.View.extend({
 
   openEdit(e) {
     e.stopPropagation();
-    this.edit_view = new EditCardView({
+    var edit_view = new EditCardView({
       model: this.model,
       card_view: this
     });
-    this.listenTo(this.edit_view, 'update', this.updateCard);
-    this.$el.append(this.edit_view.render().$el);
-    this.edit_view.$('textarea').focus()[0].select();
-    this.$overlay.show();
-    this.$overlay.on('click', this.closeEdit.bind(this));
-  },
-
-  closeEdit() {
-    var $pop_over = $('.pop_over');
-    if ($pop_over.is('.is_shown')) {
-      this.trigger('hide_pop');
-      return;
-    }
-    $('.overlay').off().hide();
-    this.edit_view.remove();
-    this.render();
-  },
-
-  updateCard(options) {
-    this.model.set('title', options.title);
-    this.closeEdit();
+    $(document.body).append(edit_view.render().$el);
+    edit_view.$('.form textarea').focus()[0].select();
   },
 
   openCardModal() {
-    this.modal_view = new CardModalView({ model: this.model });
-    this.$overlay.show();
-    this.$modal.html(this.modal_view.render().$el);
-    this.$modal.addClass('is_shown')
-    this.$overlay.on('click', this.closeCardModal.bind(this));
+    var modal_view = new CardModalView({ model: this.model });
+    $(document.body).append(modal_view.render().$el);
   },
-
-  closeCardModal() {
-    this.modal_view.remove();
-    this.$overlay.off().hide();
-    this.$modal.removeClass('is_shown').removeAttr('style');
-  }
 });
 
 module.exports = CardView;
 },{"../../../handlebars/card":1,"./card_modal":18,"./edit_card":21,"backbone":28,"handlebars":58,"jquery":60}],18:[function(require,module,exports){
-var Backbone    = require('backbone')
-  , $           = require('jquery')
-  , Handlebars  = require('handlebars')
-  , _           = require('underscore');
+var Backbone          = require('backbone')
+  , $                 = require('jquery')
+  , Handlebars        = require('handlebars')
+  , _                 = require('underscore')
+  , EditLabelsView    = require('./edit_labels')
+  , CopyView          = require('./copy')
+  , MoveView          = require('./move')
+  , ChangeDueDateView = require('./change_due_date');
 
 require('../../../handlebars/card_modal');
 
 CardModalView = Backbone.View.extend({
   template: Handlebars.templates['card_modal.hbs'],
+  className: 'modal_overlay',
   events: {
     'click a.cmnt_send': 'addComment',
     'click a.edit_description': 'editDescription',
-    'click .modal_description textarea': 'stopProp',
-    'click': 'hideDescription',
-    'click .save_description': 'saveDescription'
+    'click #description_text': 'stopProp',
+    'click .modal': 'handleModalClick',
+    'click .save_description': 'saveDescription',
+    'click': 'removeModal',
+    'click .add_actions a:first-of-type': 'editLabels',
+    'click .add_actions a:nth-of-type(2)': 'changeDueDate',
+    'click .other_actions a:first-of-type': 'moveCard',
+    'click .other_actions a:nth-of-type(2)': 'copyCard',
+    'click .other_actions a:nth-of-type(3)': 'removeCard'
   },
 
   initialize() {
     this.listenTo(this.model, 'comment_added', this.render);
+    this.listenTo(this.model, 'change:description', this.render);
+    this.$popover = $('.pop_over');
   },
 
   render() {
     this.$el.html(this.template(_.extend(this.model.toJSON(),
                                 { list: this.model.collection.list.toJSON() })));
+    this.$desc_area = this.$('.description_area');
+    this.$desc_text = this.$('#description_text');
+    this.$desc_p = this.$('.modal_description p');
     return this;
   },
 
@@ -471,33 +471,149 @@ CardModalView = Backbone.View.extend({
     var comment = this.$('.modal_comments textarea').val().trim();
     if (!comment) return;
     this.model.addComment(comment);
+    console.log(this.model.toJSON());
   },
 
   saveDescription(e) {
     e.preventDefault();
-    e.stopPropagation();
-    var description = $('.description_area textarea').val().trim()
+    var description = this.$desc_text.val().trim();
     this.model.set('description', description);
   },
 
   stopProp(e) {
-    e.sopPropagation();
+    e.stopPropagation();
   },
 
-  hideDescription() {
-    this.$('.description_area').hide();
+  handleModalClick(e) {
+    e.stopPropagation();
+    this.hideDescArea();
+    if (this.$popover.is('.is_shown')) {
+      this.removeAction();
+      this.action_type = "";
+    }
   },
 
   editDescription(e) {
+    if (this.$desc_area.is(':visible')) {
+      this.hideDescArea()
+      return;
+    }
     e.preventDefault();
     e.stopPropagation();
-    this.$('.description_area').show();
-  }
+    this.$desc_area.show();
+    this.$desc_text.val(this.model.get('description'))
+                   .focus()[0].select();
+    this.$desc_p.hide();
+  },
+
+  editLabels(e) {
+    e.preventDefault();
+    this.hideDescArea();
+    e.stopPropagation();
+    this.removeAction();
+
+    if (this.action_type !== "edit_labels") {
+      this.action_view = new EditLabelsView({
+        model: this.model
+      });
+
+      this.action_type = "edit_labels";
+      this.showAction(e.target);
+    } else {
+      this.action_type = "";
+    }
+  },
+
+  copyCard(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.hideDescArea();
+    this.removeAction();
+
+    if (this.action_type !== "copy_card") {
+      this.action_view = new CopyView({ model: this.model });
+      this.action_type = "copy_card";
+      this.showAction(e.target);
+    } else {
+      this.action_type = "";
+    }
+  },
+
+  moveCard(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.hideDescArea();
+    this.removeAction();
+
+    if (this.action_type !== "move_card") {
+      this.action_view = new MoveView({ model: this.model });
+      this.action_type = "move_card"
+      this.showAction(e.target);
+    } else {
+      this.action_type = "";
+    }
+  },
+
+  changeDueDate(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.hideDescArea();
+    this.removeAction();
+
+    if (this.action_type !== "change_due_date") {
+      this.action_view = new ChangeDueDateView({ model: this.model });
+      this.action_type = "change_due_date";
+      this.showAction(e.target);
+    } else {
+      this.action_type = "";
+    }
+  },
+
+  removeCard(e) {
+    e.preventDefault();
+    this.removeModal();
+    this.model.collection.remove(this.model);
+  },
+
+  removeModal(e) {
+    this.remove();
+    this.removeAction();
+  },
+
+  hideDescArea() {
+    this.$desc_area.hide();
+    this.$desc_p.text(this.model.get('description'));
+    this.$desc_p.show();
+  },
+
+  removeAction() {
+    if (this.action_view) {
+      this.action_view.remove();
+    }
+
+    this.clearPop();
+  },
+
+  clearPop() {
+    if (this.$popover.is('.is_shown'))
+      this.$popover = $('<div>', { class: "pop_over" }).replaceAll(this.$popover);
+  },
+
+  setPopCoords(coords) {
+    coords.top = coords.top + 45;
+    this.$popover.offset(coords);
+  },
+
+  showAction(target) {
+    this.setPopCoords($(target).offset());
+    this.$popover.html(this.action_view.render().$el)
+                 .addClass('is_shown');
+  },
 });
 
 module.exports = CardModalView;
 
-},{"../../../handlebars/card_modal":2,"backbone":28,"handlebars":58,"jquery":60,"underscore":73}],19:[function(require,module,exports){
+},{"../../../handlebars/card_modal":2,"./change_due_date":19,"./copy":20,"./edit_labels":22,"./move":26,"backbone":28,"handlebars":58,"jquery":60,"underscore":73}],19:[function(require,module,exports){
 var Backbone      = require('backbone')
   , $             = require('jquery')
   , Handlebars    = require('handlebars')
@@ -630,26 +746,41 @@ Backbone.$ = $;
 
 var EditCardView = Backbone.View.extend({
   template: Handlebars.templates['edit_card.hbs'],
-  className: 'edit_card',
+  className: 'edit_overlay',
   events: {
-    'click .save': 'saveTrigger',
+    'click .save': 'handleSave',
     'keypress .form textarea': 'handleEnter',
     'click .edit_actions a:first-child': 'editLabels',
     'click .edit_actions a:nth-child(2)': 'moveCard',
     'click .edit_actions a:nth-child(3)': 'copyCard',
     'click .edit_actions a:nth-child(4)': 'changeDueDate',
-    'click .edit_actions a:nth-child(5)': 'removeCard' 
+    'click .edit_actions a:nth-child(5)': 'removeCard',
+    'click .edit_card': 'stopProp',
+    'click': 'closeEdit'
   },
 
   initialize(opts) {
     this.card_view = opts.card_view;
-    this.listenTo(this.card_view, 'hide_pop', this.removeSubView);
+  },
+  
+  closeEdit() {
+    var $pop_over = $('.pop_over');
+    if ($pop_over.is('.is_shown')) {
+      this.removeSubView();
+      return;
+    }
+    this.remove();
+  },
+
+  stopProp(e) {
+    e.stopPropagation();
   },
 
   render() {
     this.$el.html(this.template(this.model.toJSON()));
-    this.$text = this.$('textarea');
+    this.$text = this.$('.form textarea');
     this.$popover = $('.pop_over');
+    this.$('.edit_card').offset(this.card_view.$el.offset());
     return this;
   },
 
@@ -671,7 +802,7 @@ var EditCardView = Backbone.View.extend({
 
   removeCard(e) {
     e.preventDefault();
-    $('.overlay').trigger('click').trigger('click');
+    this.remove();
     this.model.collection.remove(this.model);
   },
 
@@ -732,16 +863,23 @@ var EditCardView = Backbone.View.extend({
     this.$popover.offset(coords);
   },
 
-  saveTrigger(e) {
-    e.preventDefault();
-    this.trigger('update', { title: this.$text.val().trim() });
+  updateCard() {
+    var title = this.$('textarea').val().trim();
+    if (!title) return;
+    this.model.set('title', title);
+    this.remove();
   },
 
   handleEnter(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
-      this.trigger('update', { title: this.$text.val().trim() });
+      this.updateCard();
     }
+  },
+
+  handleSave(e) {
+    e.preventDefault();
+    this.updateCard();
   },
 
   showSubEdit(target) {

@@ -33,7 +33,7 @@ global.App = {
 list1 = {
   title: "List 1",
   cards: [
-    { title: "List 1, Card 1",},
+    { title: "List 1, Card 1", description: "Hello", labels: ["yellow", "green"]},
     { title: "List 1, Card 2",}
   ]
 };

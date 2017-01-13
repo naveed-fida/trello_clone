@@ -96,13 +96,15 @@ body a {
   margin-top: 10px;
   display: inline-block;
   padding: 0 5px;
+  color: #bbb;
+  vertical-align: middle;
 }
-.list li.card .info span:first-child {
+.list li.card .info span.date {
   border-radius: 3px;
   color: #fff;
   margin-right: 10px;
 }
-.list li.card .info span:first-child i {
+.list li.card .info span.date i {
   margin-right: 5px;
 }
 .list li.card > span.fa-pencil {
@@ -121,55 +123,6 @@ body a {
 }
 .list li.card:hover span {
   visibility: visible;
-}
-.list li.card .edit_card {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  width: 435px;
-}
-.list li.card .edit_card .form {
-  float: left;
-}
-.list li.card .edit_card .form textarea {
-  display: block;
-  width: 100%;
-  resize: none;
-  box-sizing: border-box;
-  height: 80px;
-  border: none;
-  border-radius: 4px;
-  box-shadow: 0px 1px 1px #ccc;
-  outline: none;
-  padding: 10px;
-  margin-bottom: 10px;
-  font: normal normal 14px "Roboto", Arial, Helvetica, sans-serif;
-  color: inherit;
-  height: 120px;
-  width: 280px;
-}
-.list li.card .edit_card .form .save {
-  background: #5bae45;
-  border-radius: 4px;
-  color: #fff;
-  font-weight: bold;
-  text-align: center;
-  width: 80px;
-}
-.list li.card .edit_card .edit_actions {
-  float: right;
-}
-.list li.card .edit_card .edit_actions a {
-  background: rgba(10,10,10,0.7);
-  color: #fff;
-  width: auto;
-  padding: 8px;
-  border-radius: 4px;
-  margin-bottom: 5px;
-}
-.list li.card .edit_card .edit_actions a span {
-  margin-right: 10px;
 }
 .list a {
   display: block;
@@ -214,7 +167,8 @@ body a {
   font-weight: bold;
   color: #fff;
 }
-.overlay {
+.edit_overlay,
+.modal_overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -222,7 +176,55 @@ body a {
   bottom: 0;
   z-index: 5;
   background: rgba(0,0,0,0.6);
-  display: none;
+}
+.edit_overlay .edit_card {
+  position: absolute;
+  z-index: 10;
+  width: 435px;
+}
+.edit_overlay .edit_card .form {
+  float: left;
+}
+.edit_overlay .edit_card .form textarea {
+  display: block;
+  width: 100%;
+  resize: none;
+  box-sizing: border-box;
+  height: 80px;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0px 1px 1px #ccc;
+  outline: none;
+  padding: 10px;
+  margin-bottom: 10px;
+  font: normal normal 14px "Roboto", Arial, Helvetica, sans-serif;
+  color: inherit;
+  height: 120px;
+  width: 280px;
+}
+.edit_overlay .edit_card .form .save {
+  background: #5bae45;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  padding: 8px 20px;
+  display: inline-block;
+}
+.edit_overlay .edit_card .edit_actions {
+  float: right;
+}
+.edit_overlay .edit_card .edit_actions a {
+  background: rgba(10,10,10,0.7);
+  color: #fff;
+  width: auto;
+  padding: 8px;
+  border-radius: 4px;
+  display: block;
+  margin-bottom: 5px;
+}
+.edit_overlay .edit_card .edit_actions a span {
+  margin-right: 10px;
 }
 .pop_over {
   display: none;
@@ -382,10 +384,7 @@ input.date_format:focus {
   color: #f41a12;
 }
 .modal {
-  display: none;
   z-index: 10;
-}
-.modal.is_shown {
   display: block;
   position: absolute;
   top: 20px;
@@ -396,16 +395,23 @@ input.date_format:focus {
   background: #efefef;
   border-radius: 4px;
   padding: 20px;
+  overflow: auto;
 }
-.modal.is_shown h1 {
+.modal .main {
+  float: left;
+}
+.modal h1 {
   font-size: 20px;
   padding-bottom: 10px;
 }
-.modal.is_shown h2 {
+.modal h2 {
   padding-bottom: 10px;
   font-size: 18px;
 }
-.modal > div div,
+.modal section {
+  margin-top: 10px;
+}
+.modal div,
 .modal header {
   padding: 20px 0;
 }
@@ -443,10 +449,23 @@ input.date_format:focus {
   background: #ccc;
   cursor: default;
 }
-.modal .modal_labels span {
+.modal .modal_labels span,
+.modal .modal_labels a.add_labels {
   display: inline-block;
-  width: 60;
-  height: 40px;
+  width: 45px;
+  height: 30px;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+.modal .modal_labels a.add_labels {
+  box-sizing: border-box;
+  padding: 8px 0 0 15px;
+  background: #e4e4e4;
+  color: #c0c0c0;
+}
+.modal .modal_labels a.add_labels:hover {
+  background: #c0c0c0;
+  color: #b0b0b0;
 }
 .modal .description_area .save_description {
   background: #5bae45;
@@ -462,4 +481,33 @@ input.date_format:focus {
 .modal .description_area .cancel {
   font-weight: normal;
   vertical-align: middle;
+}
+.modal .modal_comments ul {
+  margin-top: 10px;
+}
+.modal .modal_comments ul li {
+  padding-top: 10px;
+}
+.modal .modal_comments ul li span {
+  display: inline-block;
+  width: auto;
+  padding: 8px;
+  border-radius: 4px;
+  background: #fff;
+}
+.modal .panel {
+  width: 140px;
+  float: right;
+}
+.modal .panel a {
+  display: block;
+  padding: 10px;
+  font-weight: bold;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0px 1px 1px #ccc;
+  margin-bottom: 10px;
+}
+.modal .panel a:last-child {
+  margin-bottom: 0;
 }
