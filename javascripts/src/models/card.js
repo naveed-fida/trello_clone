@@ -1,6 +1,6 @@
-var Backbone = require('backbone');
+let Backbone = require('backbone');
 
-var Card = Backbone.Model.extend({
+let Card = Backbone.Model.extend({
   defaults: {
     title: "A Card",
     labels: [],
@@ -11,7 +11,17 @@ var Card = Backbone.Model.extend({
 
   addComment(comment) {
     this.get('comments').push(comment);
-    this.trigger('comment_added');
+    this.trigger('change_comments');
+  },
+
+  addLabel(label) {
+    this.get('labels').push(label);
+    this.trigger("change_labels");
+  },
+
+  removeLabel(label) {
+    this.set('labels', this.get('labels').filter(lbl => lbl !== label));
+    this.trigger('change_labels');
   }
 });
 

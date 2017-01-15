@@ -1,17 +1,29 @@
 @import 'https://fonts.googleapis.com/css?family=Roboto';
 @import "whitespace-reset.css";
 @import "font-awesome.min.css";
+html {
+  min-height: 100%;
+  position: relative;
+  min-width: 100%;
+}
 body {
   font: normal normal 14px "Roboto", Arial, Helvetica, sans-serif;
   color: #4d4d4d;
-  min-height: 100vh;
+  height: 100%;
+  width: 100%;
 }
 body #main {
+  width: 100%;
   padding: 20px;
   white-space: nowrap;
   margin-top: 40px;
 }
-body #main h3 {
+body #main:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+body #main h1 {
   font-size: 18px;
   margin-bottom: 20px;
 }
@@ -26,6 +38,31 @@ body a {
   display: inline-block;
   vertical-align: top;
   margin: 0 15px 15px 0;
+  position: relative;
+}
+.list input.edit_list {
+  display: none;
+  width: 240px;
+  padding: 5px 8px;
+  border: 0;
+  margin: 10px 0 10px 10px;
+  border-radius: 4px;
+}
+.list input.edit_list:focus {
+  outline: none;
+}
+.list .options {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px 8px 5px 8px;
+  border-radius: 3px;
+}
+.list .options:hover {
+  background: #ccc;
+}
+.list .options input.edit_list {
+  display: block;
 }
 .list .new_card {
   display: none;
@@ -76,7 +113,6 @@ body a {
 }
 .list ul .sort_placeholder {
   background: #ccc;
-  height: 30px;
 }
 .list h2 {
   font-size: 16px;
@@ -145,6 +181,7 @@ body a {
   top: 0;
   left: 0;
   right: 0;
+  z-index: 3;
 }
 #header .menu_elem {
   background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0, rgba(255,255,255,0.3) 100%);
@@ -158,10 +195,13 @@ body a {
 #header .menu_elem:hover {
   background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0, rgba(255,255,255,0.3) 100%);
 }
-#header .menu_elem#search {
+#header #search {
   width: 180px;
   border: none;
   margin-left: 10px;
+}
+#header #search::placeholder {
+  color: #fff;
 }
 #header .button {
   font-weight: bold;
@@ -510,4 +550,90 @@ input.date_format:focus {
 }
 .modal .panel a:last-child {
   margin-bottom: 0;
+}
+.new_list {
+  display: inline-block;
+  width: 300px;
+  box-sizing: border-box;
+  padding: 5px;
+  background: #e2e4e6;
+  vertical-align: top;
+  margin-right: 20px;
+  border-radius: 4px;
+}
+.new_list a.add_a_list {
+  padding: 6px;
+  height: 40px;
+  border-radius: 4px;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  background: rgba(50,50,50,0.5);
+  color: #fff;
+}
+.new_list .form input {
+  padding: 5px;
+  height: 40px;
+  border-radius: 4px;
+  border: none;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 12px;
+}
+.new_list .form input:focus {
+  outline: none;
+}
+.new_list .form .save {
+  display: inline-block;
+  background: #5bae45;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  padding: 8px 15px;
+  margin-right: 20px;
+}
+#list_select {
+  padding: 8px;
+  background: #5bae45;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+#position_select {
+  padding: 8px;
+  width: 50px;
+  background: #5bae45;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.button.move,
+.button.copy {
+  margin-top: 20px;
+  background: #5bae45;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+  padding: 6px 12px;
+}
+option {
+  background: #fff;
+  color: #222;
+  cursor: default;
+}
+.ui-sortable-placeholder {
+  background: #ccc;
+}
+.ui-sortable-helper {
+  transform: rotate(10deg);
 }

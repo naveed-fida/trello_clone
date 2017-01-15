@@ -1,4 +1,4 @@
-var Backbone           = require('backbone')
+let Backbone           = require('backbone')
   , Handlebars         = require('handlebars')
   , $                  = require('jquery')
   , EditLabelsView     = require('./edit_labels')
@@ -9,7 +9,7 @@ var Backbone           = require('backbone')
 require('../../../handlebars/edit_card');
 Backbone.$ = $;
 
-var EditCardView = Backbone.View.extend({
+let EditCardView = Backbone.View.extend({
   template: Handlebars.templates['edit_card.hbs'],
   className: 'edit_overlay',
   events: {
@@ -29,7 +29,7 @@ var EditCardView = Backbone.View.extend({
   },
   
   closeEdit() {
-    var $pop_over = $('.pop_over');
+    let $pop_over = $('.pop_over');
     if ($pop_over.is('.is_shown')) {
       this.removeSubView();
       return;
@@ -137,7 +137,7 @@ var EditCardView = Backbone.View.extend({
   },
 
   updateCard() {
-    var title = this.$('textarea').val().trim();
+    let title = this.$('textarea').val().trim();
     if (!title) return;
     this.model.set('title', title);
     this.removeEdit();

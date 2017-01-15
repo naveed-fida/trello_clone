@@ -6,7 +6,9 @@
 <p>{{title}}</p>
 <div class="info">
   {{#if due_date}}
-    <span class="date yellow"><i class="fa fa-clock-o"></i>{{format_date_small due_date}}</span>
+    <span class="date {{date_class due_date}}">
+    <i class="fa fa-clock-o"></i>{{format_date_small due_date}}
+    </span>
   {{/if}}
   {{#if description}}
     <span class="fa fa-align-left desc"></span>

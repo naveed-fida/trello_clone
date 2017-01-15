@@ -1,4 +1,4 @@
-var Backbone          = require('backbone')
+let Backbone          = require('backbone')
   , $                 = require('jquery')
   , Handlebars        = require('handlebars')
   , _                 = require('underscore')
@@ -23,12 +23,12 @@ CardModalView = Backbone.View.extend({
     'click .add_actions a:nth-of-type(2)': 'changeDueDate',
     'click .other_actions a:first-of-type': 'moveCard',
     'click .other_actions a:nth-of-type(2)': 'copyCard',
-    'click .other_actions a:nth-of-type(3)': 'removeCard'
+    'click .other_actions a:nth-of-type(3)': 'removeCard',
+    'click .add_labels': 'editLabels'
   },
 
   initialize() {
-    this.listenTo(this.model, 'comment_added', this.render);
-    this.listenTo(this.model, 'change:description', this.render);
+    this.listenTo(this.model, 'change change_comments change_labels', this.render);
     this.$popover = $('.pop_over');
   },
 
@@ -43,15 +43,14 @@ CardModalView = Backbone.View.extend({
 
   addComment(e) {
     e.preventDefault();
-    var comment = this.$('.modal_comments textarea').val().trim();
+    let comment = this.$('.modal_comments textarea').val().trim();
     if (!comment) return;
     this.model.addComment(comment);
-    console.log(this.model.toJSON());
   },
 
   saveDescription(e) {
     e.preventDefault();
-    var description = this.$desc_text.val().trim();
+    let description = this.$desc_text.val().trim();
     this.model.set('description', description);
   },
 

@@ -2,7 +2,8 @@ let Backbone      = require('backbone')
   , $             = require('jquery')
   , Handlebars    = require('handlebars')
   , EditCardView  = require('./edit_card')
-  , CardModalView = require('./card_modal');
+  , CardModalView = require('./card_modal')
+  , lists         = require('../collections/lists');
 
 require('../../../handlebars/card');
 Backbone.$ = $;
@@ -13,12 +14,13 @@ let CardView = Backbone.View.extend({
   className: 'card',
   events: {
     'click': 'openCardModal',
-    'click span.fa-pencil': 'openEdit'
+    'click span.fa-pencil': 'openEdit',
+    'placed': 'handlePlaced',
+    'moved_to_other': 'moveCard'
   },
 
   initialize() {
-    this.listenTo(this.model, 'change', this.render);
-    this.listenTo(this.model, 'comment_added', this.render);
+    this.listenTo(this.model, 'change change_labels change_comments', this.render);
   },
 
   render() {
@@ -28,7 +30,7 @@ let CardView = Backbone.View.extend({
 
   openEdit(e) {
     e.stopPropagation();
-    var edit_view = new EditCardView({
+    let edit_view = new EditCardView({
       model: this.model,
       card_view: this
     });
@@ -37,9 +39,22 @@ let CardView = Backbone.View.extend({
   },
 
   openCardModal() {
-    var modal_view = new CardModalView({ model: this.model });
+    let modal_view = new CardModalView({ model: this.model });
     $(document.body).append(modal_view.render().$el);
   },
+
+  handlePlaced() {
+    console.log(this.$el.index());
+    this.model.collection.changePosition(this.model, this.$el.index());
+  },
+
+  moveCard(e, options) {
+    let model     = this.model.collection.remove(this.model, {silent: true})
+      , position  = this.$el.index()
+      , list      = lists.get(options.list_id);
+
+    list.cards.add(model, {at: position, silent: true});
+  }
 });
 
 module.exports = CardView;

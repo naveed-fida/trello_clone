@@ -1,9 +1,9 @@
-var Backbone    = require('backbone')
+let Backbone    = require('backbone')
   , Handlebars  = require('handlebars');
 
 require('../../../handlebars/header');
 
-var HeaderView = Backbone.View.extend({
+let HeaderView = Backbone.View.extend({
   template: Handlebars.templates['header.hbs'],
 
   render() {

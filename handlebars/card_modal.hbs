@@ -2,7 +2,15 @@
   <div class="main">  
     <header>
       <h1>{{title}}</h1>
-      <p>in list <a href="#">{{list.title}}</a></p>
+      <p>
+        in list <a href="#">{{list.title}}</a>&nbsp;&nbsp;&nbsp;
+        {{#if due_date}}
+        due on&nbsp;
+        <span class="date {{date_class due_date}}">
+          <i class="fa fa-clock-o"></i>{{format_date_full due_date}}
+        </span>
+        {{/if}}
+      </p>
     </header>
     {{#if labels.[0]}}
     <div class="modal_labels">

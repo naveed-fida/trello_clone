@@ -1,4 +1,4 @@
-var Backbone      = require('backbone')
+let Backbone      = require('backbone')
   , $             = require('jquery')
   , Handlebars    = require('handlebars')
   , lists         = require('../collections/lists')
@@ -8,7 +8,7 @@ Backbone.$ = $;
 require('../../../handlebars/change_due_date');
 require('jquery-ui');
 
-var ChangeDueDateView = Backbone.View.extend({
+let ChangeDueDateView = Backbone.View.extend({
   template: Handlebars.templates['change_due_date.hbs'],
   events: {
     'click .save_date': 'updateDate',
@@ -18,7 +18,7 @@ var ChangeDueDateView = Backbone.View.extend({
   render() {
     this.$el.html(this.template());
 
-    var $date_picker = this.$('.date_picker');
+    let $date_picker = this.$('.date_picker');
     $date_picker.datepicker({
       changeMonth: true,
       changeYear: true,
@@ -27,14 +27,14 @@ var ChangeDueDateView = Backbone.View.extend({
         this.$('.date_format').val(dateText);
       }
     });
-    var date_frmt = moment(+$date_picker.datepicker('getDate')).format('MM/DD/YYYY');
+    let date_frmt = moment(+$date_picker.datepicker('getDate')).format('MM/DD/YYYY');
     this.$('.date_format').val(date_frmt);
     return this;
   },
 
   updateDate(e) {
     e.preventDefault();
-    var due_date = this.$('.date_picker').datepicker('getDate');
+    let due_date = this.$('.date_picker').datepicker('getDate');
     console.log(due_date.toString());
     this.model.set('due_date', +due_date);
     this.trigger('due_date_changed')

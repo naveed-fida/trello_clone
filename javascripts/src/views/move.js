@@ -1,4 +1,4 @@
-var Backbone      = require('backbone')
+let Backbone      = require('backbone')
   , $             = require('jquery')
   , Handlebars    = require('handlebars')
   , lists           = require('../collections/lists');
@@ -8,7 +8,7 @@ require('../../../handlebars/position');
 require('../../../handlebars/helpers');
 Backbone.$ = $;
 
-var MoveView = Backbone.View.extend({
+let MoveView = Backbone.View.extend({
   template: Handlebars.templates['move.hbs'],
   pos_template: Handlebars.templates['position.hbs'],
   events: {
@@ -38,8 +38,8 @@ var MoveView = Backbone.View.extend({
   },
 
   listSelectChange(e) {
-    var list_idx = +$(e.target).val();
-    var list = lists.get(list_idx);
+    let list_idx = +$(e.target).val();
+    let list = lists.get(list_idx);
     if (list === this.model.collection.list) {
       this.renderPosition(list.cards.length);
     } else {
@@ -55,7 +55,7 @@ var MoveView = Backbone.View.extend({
 
   moveCard(e) {
     e.preventDefault();
-    var model     = this.model.collection.remove(this.model)
+    let model     = this.model.collection.remove(this.model)
       , position  = +this.$('.position_select').val() - 1
       , list      = lists.get(+this.$('.list_select').val());
 

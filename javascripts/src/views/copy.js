@@ -1,4 +1,4 @@
-var Backbone      = require('backbone')
+let Backbone      = require('backbone')
   , $             = require('jquery')
   , Handlebars    = require('handlebars')
   , lists           = require('../collections/lists');
@@ -8,7 +8,7 @@ require('../../../handlebars/position');
 require('../../../handlebars/helpers');
 Backbone.$ = $;
 
-var CopyView = Backbone.View.extend({
+let CopyView = Backbone.View.extend({
   template: Handlebars.templates['copy.hbs'],
   pos_template: Handlebars.templates['position.hbs'],
   events: {
@@ -37,8 +37,8 @@ var CopyView = Backbone.View.extend({
   },
 
   listSelectChange(e) {
-    var list_idx = +$(e.target).val();
-    var list = lists.get(list_idx);
+    let list_idx = +$(e.target).val();
+    let list = lists.get(list_idx);
     if (list === this.model.collection.list) {
       this.renderPosition(list.cards.length);
     } else {
@@ -54,7 +54,7 @@ var CopyView = Backbone.View.extend({
 
   copyCard(e) {
     e.preventDefault();
-      var position  = +this.$('.position_select').val() - 1
+      let position  = +this.$('.position_select').val() - 1
       , list      = lists.get(+this.$('.list_select').val());
 
     list.cards.add(this.model.clone(), { at: position });

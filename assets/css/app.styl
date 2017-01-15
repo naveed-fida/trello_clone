@@ -26,16 +26,25 @@ textarea()
   margin-bottom: 10px
   font: normal normal 14px "Roboto", Arial, Helvetica, sans-serif
   color: inherit
-
+html
+  min-height: 100%
+  position: relative
+  min-width: 100%
 body
   font: normal normal font_size "Roboto", Arial, Helvetica, sans-serif
   color: font_color
-  min-height: 100vh
+  height: 100%
+  width: 100%
   #main
+    width: 100%
     padding: 20px
     white-space: nowrap
     margin-top: 40px
-    h3
+    &:after
+      content: ""
+      display: block
+      clear: both
+    h1
       font-size: 18px
       margin-bottom: 20px
   a
@@ -48,6 +57,26 @@ body
   display: inline-block
   vertical-align: top
   margin: 0 15px 15px 0
+  position: relative
+  input.edit_list
+    display: none;
+    width: 240px
+    padding: 5px 8px
+    border: 0
+    margin: 10px 0 10px 10px
+    border-radius: 4px
+    &:focus
+      outline: none
+  .options
+    position: absolute
+    top: 5px
+    right: 5px
+    padding: 5px 8px 5px 8px
+    border-radius: 3px
+    &:hover
+      background: #ccc
+    input.edit_list
+      display: block
   .new_card
     display: none
     padding: 0 10px 10px 10px
@@ -75,7 +104,6 @@ body
     padding: 0 10px 0 10px
     .sort_placeholder
       background: #ccc
-      height: 30px
   h2
     font-size: 16px
     padding: 10px
@@ -134,7 +162,7 @@ body
   top: 0
   left: 0
   right: 0
-  // position: relative
+  z-index: 3
   .menu_elem
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0, rgba(255, 255, 255, 0.3) 100%)
     height: 30px
@@ -145,10 +173,12 @@ body
     border-radius: 3px
     &:hover
       background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0, rgba(255, 255, 255, 0.3) 100%)
-    &#search
-      width: 180px
-      border: none
-      margin-left: 10px
+  #search
+    width: 180px
+    border: none
+    margin-left: 10px
+    &::placeholder
+      color: #fff
   .button
     font-weight: bold
     color: #fff
@@ -403,3 +433,70 @@ input.date_format
       margin-bottom: 10px
       &:last-child
         margin-bottom: 0
+
+// new list styles
+.new_list
+  display: inline-block
+  width: 300px
+  box-sizing: border-box
+  padding: 5px
+  background: #e2e4e6
+  vertical-align: top
+  margin-right: 20px
+  border-radius: 4px
+  a.add_a_list
+    padding: 6px
+    height: 40px
+    border-radius: 4px
+    display: block
+    box-sizing: border-box
+    width: 100%
+    background: rgba(50, 50, 50, .5)
+    color: #fff
+  .form
+    input
+      padding: 5px
+      height: 40px
+      border-radius: 4px
+      border: none
+      display: block
+      box-sizing: border-box
+      width: 100%
+      margin-bottom: 12px
+      &:focus
+        outline: none
+    .save
+      display: inline-block
+      button()
+      padding: 8px 15px
+      margin-right: 20px
+
+//move and copy styles
+#list_select
+  padding: 8px
+  button()
+  margin-bottom: 20px
+  cursor: pointer
+
+#position_select
+  padding: 8px
+  width: 50px
+  button()
+  margin-left: 10px
+  cursor: pointer
+
+.button.move, .button.copy
+  margin-top: 20px
+  button()
+  display: inline-block
+  padding: 6px 12px
+
+option
+  background: #fff
+  color: #222
+  cursor: default
+
+.ui-sortable-placeholder
+  background: #ccc
+.ui-sortable-helper
+  transform: rotate(10deg)

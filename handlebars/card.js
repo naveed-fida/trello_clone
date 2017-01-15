@@ -4,9 +4,13 @@ templates['card.hbs'] = template({"1":function(container,depth0,helpers,partials
     + container.escapeExpression(container.lambda(depth0, depth0))
     + "\"></span>\n";
 },"3":function(container,depth0,helpers,partials,data) {
-    return "    <span class=\"date yellow\"><i class=\"fa fa-clock-o\"></i>"
-    + container.escapeExpression((helpers.format_date_small || (depth0 && depth0.format_date_small) || helpers.helperMissing).call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.due_date : depth0),{"name":"format_date_small","hash":{},"data":data}))
-    + "</span>\n";
+    var alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3=container.escapeExpression;
+
+  return "    <span class=\"date "
+    + alias3((helpers.date_class || (depth0 && depth0.date_class) || alias2).call(alias1,(depth0 != null ? depth0.due_date : depth0),{"name":"date_class","hash":{},"data":data}))
+    + "\">\n    <i class=\"fa fa-clock-o\"></i>"
+    + alias3((helpers.format_date_small || (depth0 && depth0.format_date_small) || alias2).call(alias1,(depth0 != null ? depth0.due_date : depth0),{"name":"format_date_small","hash":{},"data":data}))
+    + "\n    </span>\n";
 },"5":function(container,depth0,helpers,partials,data) {
     return "    <span class=\"fa fa-align-left desc\"></span>\n";
 },"7":function(container,depth0,helpers,partials,data) {

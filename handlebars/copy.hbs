@@ -3,16 +3,21 @@
 </div>
 
 <div class="pop_over_body">
-  <select class="list_select">
-    {{#each lists}}
-      {{#if current}}
-      <option value="{{id}}" selected>{{title}} (current)</option>
-      {{else}}
-      <option value="{{id}}">{{title}}</option>
-      {{/if}}      
-    {{/each}}
-  </select>
-  <select class="position_select">
-  </select>
+  <div>
+    <select class="list_select" id="list_select">
+      {{#each lists}}
+        {{#if current}}
+        <option value="{{id}}" selected>{{title}} (current)</option>
+        {{else}}
+        <option value="{{id}}">{{title}}</option>
+        {{/if}}      
+      {{/each}}
+    </select>
+  </div>
+  <div>
+    <label for="position_select">Position</label>
+    <select class="position_select" id="position_select">
+    </select>
+  </div>
   <a href="#" class="button copy">Copy</a>
 </div>

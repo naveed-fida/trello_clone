@@ -19,3 +19,14 @@ Handlebars.registerHelper("format_date_small", function(date_stamp) {
   var moment_date = moment(date_stamp);
   return moment_date.format('MMM DD');
 });
+
+Handlebars.registerHelper("format_date_full", function(date_stamp) {
+  var moment_date = moment(date_stamp);
+  return moment_date.format('MMMM DD');
+});
+
+Handlebars.registerHelper("date_class", function(date_stamp) {
+  if (Date.now() < date_stamp)
+    return "yellow"
+  else return "red"
+});

@@ -1,4 +1,4 @@
-var Backbone      = require('backbone')
+let Backbone      = require('backbone')
   , $             = require('jquery')
   , Handlebars    = require('handlebars');
 
@@ -7,7 +7,7 @@ Backbone.$ = $;
 require('../../../handlebars/helpers');
 require('../../../handlebars/edit_labels');
 
-var EditLabelsView = Backbone.View.extend({
+let EditLabelsView = Backbone.View.extend({
   template: Handlebars.templates['edit_labels.hbs'],
   'className': 'edit_labels',
   events: {
@@ -25,12 +25,11 @@ var EditLabelsView = Backbone.View.extend({
     let color = $li.attr('class');
 
     if(!this.model.get('labels').includes(color)) {
-      this.model.set('labels', [...this.model.get('labels'), color]);
+      // this.model.set('labels', [...this.model.get('labels'), color]);
+      this.model.addLabel(color);
       $li.find('span').attr('class', 'fa fa-check');
     } else {
-      this.model.set('labels',
-        this.model.get('labels').filter(label => label !== color)
-      );
+      this.model.removeLabel(color);
       $li.find('span').attr('class', '');
     }
   },

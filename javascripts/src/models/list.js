@@ -1,7 +1,7 @@
-var Backbone    = require('backbone')
+let Backbone    = require('backbone')
   , Cards       = require('../collections/cards');
 
-var List = Backbone.Model.extend({
+let List = Backbone.Model.extend({
   defaults: {
     title: ""
   },
@@ -11,7 +11,7 @@ var List = Backbone.Model.extend({
     this.cards.list = this;
     return {
       title: data.title,
-      id: List.generateId()
+      id: data.id || this.collection.last_id++
     };
   },
 
@@ -19,15 +19,15 @@ var List = Backbone.Model.extend({
   },
 
   toJSONWithCards() {
-    var list = this.toJSON();
+    let list = this.toJSON();
     list.cards = this.cards.toJSON();
     return list;
   }
 });
 
-List.last_id = 1;
-List.generateId = function() {
-  return this.last_id++;
-}
+// List.last_id = 1;
+// List.generateId = function() {
+//   return this.last_id++;
+// }
 
 module.exports = List;
