@@ -259,7 +259,7 @@ templates['position.hbs'] = template({"1":function(container,depth0,helpers,part
 
 },{"handlebars":60}],13:[function(require,module,exports){
 (function (global){
-var Backbone    = require('backbone')
+let Backbone    = require('backbone')
   , $           = require('jquery')
   , IndexView   = require('./views/index');
 
@@ -267,7 +267,7 @@ global.App = {
   lists: require('./collections/lists'),
 
   init() {
-    var lists = this.retrieveFromBrowser();
+    let lists = this.retrieveFromBrowser();
     this.lists.reset(lists, { parse: true});
     this.createIndex();
     $(window).on('unload', this.saveToBrowser.bind(this));
@@ -284,7 +284,7 @@ global.App = {
   },
 
   saveToBrowser() {
-    var lists = this.lists.toJSONAll();
+    let lists = this.lists.toJSONAll();
     window.localStorage.setItem("trello_clone", JSON.stringify(lists));
   }
 };
@@ -293,10 +293,10 @@ App.init();
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
 },{"./collections/lists":15,"./views/index":25,"backbone":30,"jquery":62}],14:[function(require,module,exports){
-var Backbone   = require('backbone')
+let Backbone   = require('backbone')
   , Card       = require('../models/card');
 
-var Cards = Backbone.Collection.extend({
+let Cards = Backbone.Collection.extend({
   model: Card,
 
   changePosition(card, new_pos) {
@@ -307,11 +307,11 @@ var Cards = Backbone.Collection.extend({
 
 module.exports = Cards;
 },{"../models/card":16,"backbone":30}],15:[function(require,module,exports){
-var Backbone = require('backbone')
+let Backbone = require('backbone')
   , List     = require('../models/list')
   , _        = require('underscore');
 
-var Lists = Backbone.Collection.extend({
+let Lists = Backbone.Collection.extend({
   model: List,
 
   initialize() {
@@ -319,7 +319,7 @@ var Lists = Backbone.Collection.extend({
   },
 
   toJSONAll() {
-    var lists = [];
+    let lists = [];
     this.models.forEach(model => {
       lists.push(model.toJSONWithCards());
     });
@@ -343,9 +343,9 @@ var Lists = Backbone.Collection.extend({
 
 module.exports = new Lists();
 },{"../models/list":17,"backbone":30,"underscore":75}],16:[function(require,module,exports){
-var Backbone = require('backbone');
+let Backbone = require('backbone');
 
-var Card = Backbone.Model.extend({
+let Card = Backbone.Model.extend({
   defaults: {
     title: "A Card",
     labels: [],
@@ -373,10 +373,10 @@ var Card = Backbone.Model.extend({
 
 module.exports = Card;
 },{"backbone":30}],17:[function(require,module,exports){
-var Backbone    = require('backbone')
+let Backbone    = require('backbone')
   , Cards       = require('../collections/cards');
 
-var List = Backbone.Model.extend({
+let List = Backbone.Model.extend({
   defaults: {
     title: ""
   },
@@ -394,7 +394,7 @@ var List = Backbone.Model.extend({
   },
 
   toJSONWithCards() {
-    var list = this.toJSON();
+    let list = this.toJSON();
     list.cards = this.cards.toJSON();
     return list;
   }
@@ -439,7 +439,7 @@ let CardView = Backbone.View.extend({
 
   openEdit(e) {
     e.stopPropagation();
-    var edit_view = new EditCardView({
+    let edit_view = new EditCardView({
       model: this.model,
       card_view: this
     });
@@ -448,7 +448,7 @@ let CardView = Backbone.View.extend({
   },
 
   openCardModal() {
-    var modal_view = new CardModalView({ model: this.model });
+    let modal_view = new CardModalView({ model: this.model });
     $(document.body).append(modal_view.render().$el);
   },
 
@@ -458,7 +458,7 @@ let CardView = Backbone.View.extend({
   },
 
   moveCard(e, options) {
-    var model     = this.model.collection.remove(this.model, {silent: true})
+    let model     = this.model.collection.remove(this.model, {silent: true})
       , position  = this.$el.index()
       , list      = lists.get(options.list_id);
 
@@ -656,7 +656,7 @@ CardModalView = Backbone.View.extend({
 module.exports = CardModalView;
 
 },{"../../../handlebars/card_modal":2,"./change_due_date":20,"./copy":21,"./edit_labels":23,"./move":27,"backbone":30,"handlebars":60,"jquery":62,"underscore":75}],20:[function(require,module,exports){
-var Backbone      = require('backbone')
+let Backbone      = require('backbone')
   , $             = require('jquery')
   , Handlebars    = require('handlebars')
   , lists         = require('../collections/lists')
@@ -666,7 +666,7 @@ Backbone.$ = $;
 require('../../../handlebars/change_due_date');
 require('jquery-ui');
 
-var ChangeDueDateView = Backbone.View.extend({
+let ChangeDueDateView = Backbone.View.extend({
   template: Handlebars.templates['change_due_date.hbs'],
   events: {
     'click .save_date': 'updateDate',
@@ -676,7 +676,7 @@ var ChangeDueDateView = Backbone.View.extend({
   render() {
     this.$el.html(this.template());
 
-    var $date_picker = this.$('.date_picker');
+    let $date_picker = this.$('.date_picker');
     $date_picker.datepicker({
       changeMonth: true,
       changeYear: true,
@@ -685,14 +685,14 @@ var ChangeDueDateView = Backbone.View.extend({
         this.$('.date_format').val(dateText);
       }
     });
-    var date_frmt = moment(+$date_picker.datepicker('getDate')).format('MM/DD/YYYY');
+    let date_frmt = moment(+$date_picker.datepicker('getDate')).format('MM/DD/YYYY');
     this.$('.date_format').val(date_frmt);
     return this;
   },
 
   updateDate(e) {
     e.preventDefault();
-    var due_date = this.$('.date_picker').datepicker('getDate');
+    let due_date = this.$('.date_picker').datepicker('getDate');
     console.log(due_date.toString());
     this.model.set('due_date', +due_date);
     this.trigger('due_date_changed')
@@ -707,7 +707,7 @@ var ChangeDueDateView = Backbone.View.extend({
 
 module.exports = ChangeDueDateView;
 },{"../../../handlebars/change_due_date":3,"../collections/lists":15,"backbone":30,"handlebars":60,"jquery":62,"jquery-ui":61,"moment":63}],21:[function(require,module,exports){
-var Backbone      = require('backbone')
+let Backbone      = require('backbone')
   , $             = require('jquery')
   , Handlebars    = require('handlebars')
   , lists           = require('../collections/lists');
@@ -717,7 +717,7 @@ require('../../../handlebars/position');
 require('../../../handlebars/helpers');
 Backbone.$ = $;
 
-var CopyView = Backbone.View.extend({
+let CopyView = Backbone.View.extend({
   template: Handlebars.templates['copy.hbs'],
   pos_template: Handlebars.templates['position.hbs'],
   events: {
@@ -746,8 +746,8 @@ var CopyView = Backbone.View.extend({
   },
 
   listSelectChange(e) {
-    var list_idx = +$(e.target).val();
-    var list = lists.get(list_idx);
+    let list_idx = +$(e.target).val();
+    let list = lists.get(list_idx);
     if (list === this.model.collection.list) {
       this.renderPosition(list.cards.length);
     } else {
@@ -763,7 +763,7 @@ var CopyView = Backbone.View.extend({
 
   copyCard(e) {
     e.preventDefault();
-      var position  = +this.$('.position_select').val() - 1
+      let position  = +this.$('.position_select').val() - 1
       , list      = lists.get(+this.$('.list_select').val());
 
     list.cards.add(this.model.clone(), { at: position });
@@ -773,7 +773,7 @@ var CopyView = Backbone.View.extend({
 
 module.exports = CopyView;
 },{"../../../handlebars/copy":4,"../../../handlebars/helpers":8,"../../../handlebars/position":12,"../collections/lists":15,"backbone":30,"handlebars":60,"jquery":62}],22:[function(require,module,exports){
-var Backbone           = require('backbone')
+let Backbone           = require('backbone')
   , Handlebars         = require('handlebars')
   , $                  = require('jquery')
   , EditLabelsView     = require('./edit_labels')
@@ -784,7 +784,7 @@ var Backbone           = require('backbone')
 require('../../../handlebars/edit_card');
 Backbone.$ = $;
 
-var EditCardView = Backbone.View.extend({
+let EditCardView = Backbone.View.extend({
   template: Handlebars.templates['edit_card.hbs'],
   className: 'edit_overlay',
   events: {
@@ -804,7 +804,7 @@ var EditCardView = Backbone.View.extend({
   },
   
   closeEdit() {
-    var $pop_over = $('.pop_over');
+    let $pop_over = $('.pop_over');
     if ($pop_over.is('.is_shown')) {
       this.removeSubView();
       return;
@@ -912,7 +912,7 @@ var EditCardView = Backbone.View.extend({
   },
 
   updateCard() {
-    var title = this.$('textarea').val().trim();
+    let title = this.$('textarea').val().trim();
     if (!title) return;
     this.model.set('title', title);
     this.removeEdit();
@@ -940,7 +940,7 @@ var EditCardView = Backbone.View.extend({
 
 module.exports = EditCardView;
 },{"../../../handlebars/edit_card":5,"./change_due_date":20,"./copy":21,"./edit_labels":23,"./move":27,"backbone":30,"handlebars":60,"jquery":62}],23:[function(require,module,exports){
-var Backbone      = require('backbone')
+let Backbone      = require('backbone')
   , $             = require('jquery')
   , Handlebars    = require('handlebars');
 
@@ -949,7 +949,7 @@ Backbone.$ = $;
 require('../../../handlebars/helpers');
 require('../../../handlebars/edit_labels');
 
-var EditLabelsView = Backbone.View.extend({
+let EditLabelsView = Backbone.View.extend({
   template: Handlebars.templates['edit_labels.hbs'],
   'className': 'edit_labels',
   events: {
@@ -979,12 +979,12 @@ var EditLabelsView = Backbone.View.extend({
 
 module.exports = EditLabelsView;
 },{"../../../handlebars/edit_labels":6,"../../../handlebars/helpers":8,"backbone":30,"handlebars":60,"jquery":62}],24:[function(require,module,exports){
-var Backbone    = require('backbone')
+let Backbone    = require('backbone')
   , Handlebars  = require('handlebars');
 
 require('../../../handlebars/header');
 
-var HeaderView = Backbone.View.extend({
+let HeaderView = Backbone.View.extend({
   template: Handlebars.templates['header.hbs'],
 
   render() {
@@ -995,7 +995,7 @@ var HeaderView = Backbone.View.extend({
 
 module.exports = HeaderView;
 },{"../../../handlebars/header":7,"backbone":30,"handlebars":60}],25:[function(require,module,exports){
-var Backbone    = require('backbone')
+let Backbone    = require('backbone')
   , $           = require('jquery')
   , HeaderView  = require('./header')
   , ListView    = require('./list')
@@ -1005,7 +1005,7 @@ var Backbone    = require('backbone')
 require('jquery-ui');
 Backbone.$ = $;
 
-var IndexView = Backbone.View.extend({
+let IndexView = Backbone.View.extend({
   el: $('#app')[0],
   events: {
     'sortstop #lists': 'handleSortStop',
@@ -1057,7 +1057,7 @@ var IndexView = Backbone.View.extend({
 
 module.exports = IndexView;
 },{"../collections/lists":15,"./header":24,"./list":26,"./new_list":28,"backbone":30,"jquery":62,"jquery-ui":61}],26:[function(require,module,exports){
-var Backbone    = require('backbone') 
+let Backbone    = require('backbone') 
   , $           = require('jquery')
   , Handlebars  = require('handlebars')
   , CardView    = require('./card');
@@ -1068,7 +1068,7 @@ require('jquery-ui/');
 
 Backbone.$ = $;
 
-var ListView = Backbone.View.extend({
+let ListView = Backbone.View.extend({
   className: "list",
   template: Handlebars.templates["list.hbs"],
   events: {
@@ -1116,7 +1116,7 @@ var ListView = Backbone.View.extend({
   },
 
   addOne(card) {
-    var cardView = new CardView({ model: card });
+    let cardView = new CardView({ model: card });
     this.$ul.append(cardView.render().$el);
   },
 
@@ -1134,7 +1134,7 @@ var ListView = Backbone.View.extend({
 
   addCardModel(e) {
     if (e) e.preventDefault();
-    var title = this.$('textarea').val();
+    let title = this.$('textarea').val();
     this.model.cards.add({ title });
     this.$('textarea').val('').focus();
   },
@@ -1167,7 +1167,7 @@ var ListView = Backbone.View.extend({
 
   saveTitle(e) {
     if (e.key === 'Enter') {
-      var text = $(e.target).val().trim();
+      let text = $(e.target).val().trim();
       if (text) this.model.set('title', text);
       this.closeEdit();
     }
@@ -1205,7 +1205,7 @@ var ListView = Backbone.View.extend({
 
 module.exports = ListView;
 },{"../../../handlebars/list":9,"./card":18,"backbone":30,"handlebars":60,"jquery":62,"jquery-ui/":61}],27:[function(require,module,exports){
-var Backbone      = require('backbone')
+let Backbone      = require('backbone')
   , $             = require('jquery')
   , Handlebars    = require('handlebars')
   , lists           = require('../collections/lists');
@@ -1215,7 +1215,7 @@ require('../../../handlebars/position');
 require('../../../handlebars/helpers');
 Backbone.$ = $;
 
-var MoveView = Backbone.View.extend({
+let MoveView = Backbone.View.extend({
   template: Handlebars.templates['move.hbs'],
   pos_template: Handlebars.templates['position.hbs'],
   events: {
@@ -1245,8 +1245,8 @@ var MoveView = Backbone.View.extend({
   },
 
   listSelectChange(e) {
-    var list_idx = +$(e.target).val();
-    var list = lists.get(list_idx);
+    let list_idx = +$(e.target).val();
+    let list = lists.get(list_idx);
     if (list === this.model.collection.list) {
       this.renderPosition(list.cards.length);
     } else {
@@ -1262,7 +1262,7 @@ var MoveView = Backbone.View.extend({
 
   moveCard(e) {
     e.preventDefault();
-    var model     = this.model.collection.remove(this.model)
+    let model     = this.model.collection.remove(this.model)
       , position  = +this.$('.position_select').val() - 1
       , list      = lists.get(+this.$('.list_select').val());
 
@@ -1273,7 +1273,7 @@ var MoveView = Backbone.View.extend({
 
 module.exports = MoveView;
 },{"../../../handlebars/helpers":8,"../../../handlebars/move":10,"../../../handlebars/position":12,"../collections/lists":15,"backbone":30,"handlebars":60,"jquery":62}],28:[function(require,module,exports){
-var Backbone    = require('backbone')
+let Backbone    = require('backbone')
   , $           = require('jquery')
   , HeaderView  = require('./header')
   , Handlebars  = require('handlebars')
@@ -1282,7 +1282,7 @@ var Backbone    = require('backbone')
 require('../../../handlebars/new_list');
 Backbone.$ = $;
 
-var NewListView = Backbone.View.extend({
+let NewListView = Backbone.View.extend({
   template: Handlebars.templates['new_list.hbs'],
   className: 'new_list',
   events: {
@@ -1324,7 +1324,7 @@ var NewListView = Backbone.View.extend({
   },
 
   saveList(e) {
-    var list_title = this.$input.val().trim();
+    let list_title = this.$input.val().trim();
     if (!list_title) return;
     lists.add({
       title: list_title,
