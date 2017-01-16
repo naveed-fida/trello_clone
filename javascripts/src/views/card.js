@@ -44,7 +44,6 @@ let CardView = Backbone.View.extend({
   },
 
   handlePlaced() {
-    console.log(this.$el.index());
     this.model.collection.changePosition(this.model, this.$el.index());
   },
 

@@ -77,7 +77,7 @@ let EditCardView = Backbone.View.extend({
 
     if (this.sub_edit_class !== "move_card") {
       this.sub_edit_view = new MoveView({ model: this.model });
-      this.listenTo(this.sub_edit_view, "card_moved", this.removeEdit)
+      this.listenTo(this.sub_edit_view, "card_moved", this.removeEdit);
       this.sub_edit_class = "move_card"
       this.showSubEdit(e.target);
     } else {

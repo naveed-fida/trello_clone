@@ -75,7 +75,8 @@ let ListView = Backbone.View.extend({
 
   addCardModel(e) {
     if (e) e.preventDefault();
-    let title = this.$('textarea').val();
+    let title = this.$('textarea').val().trim();
+    if (!title) return;
     this.model.cards.add({ title });
     this.$('textarea').val('').focus();
   },
@@ -131,6 +132,7 @@ let ListView = Backbone.View.extend({
     $('.new_card:visible').closest('.list').trigger('close_new');
     $('.new_list:visible').trigger('close_form');
     $('input.edit_list:visible').closest('.list').trigger('close_edit');
+    $('.search_wrapper').trigger('hide');
   },
 
   receiveCard(e, ui) {
@@ -138,9 +140,8 @@ let ListView = Backbone.View.extend({
   },
 
   stylePlaceholder(e, ui) {
-    ui.placeholder.width(ui.helper.width());
-    ui.placeholder.height(ui.helper.height());
-    ui.placeholder.css('background', '#ccc');    
+    ui.placeholder.width(ui.helper.outerWidth());
+    ui.placeholder.height(ui.helper.outerHeight());    
   }
 });
 

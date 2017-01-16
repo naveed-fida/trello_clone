@@ -6,7 +6,7 @@ app_bundled := javascripts/bundle.js
 styl := $(wildcard assets/css/*.styl)
 css := $(patsubst %.styl,%.css,$(styl))
 
-all: $(handlebars) $(app_bundled) $(css) 
+all: handlebars browserify stylus 
 
 .PHONY: handlebars browserify stylus
 handlebars: $(hbs_templates)
@@ -30,5 +30,5 @@ $(hbs_templates): %.js: %.hbs
 
 clean:
 	@echo "Running Clean...."
-	@rm -f $(app_bundled) $(css) $(hbs_templates) javascripts/*.map.js
+	@rm -f $(app_bundled) $(css) $(hbs_templates) javascripts/*.map.js $(app_minified)
 	@echo "Done Clean...."

@@ -4,9 +4,13 @@ let Backbone   = require('backbone')
 let Cards = Backbone.Collection.extend({
   model: Card,
 
+  initialize(cards, options) {
+    this.list = options.list;
+  },
+
   changePosition(card, new_pos) {
-    this.remove(card, {silent: true});
-    this.add(card, {at: new_pos, silent: true});
+    this.remove(card, { silent: true });
+    this.add(card, { at: new_pos, silent: true });
   }
 });
 

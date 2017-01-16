@@ -6,13 +6,13 @@ let List = Backbone.Model.extend({
     title: ""
   },
 
-  parse(data) {
-    this.cards = new Cards(data.cards);
+  parse(list) {
+    this.cards = new Cards(list.cards, { list: this });
     this.cards.list = this;
-    return {
-      title: data.title,
-      id: data.id || this.collection.last_id++
-    };
+    
+    delete list.cards;
+    list.id = list.id || this.collection.last_id++;
+    return list;
   },
 
   initialize() {
@@ -24,10 +24,5 @@ let List = Backbone.Model.extend({
     return list;
   }
 });
-
-// List.last_id = 1;
-// List.generateId = function() {
-//   return this.last_id++;
-// }
 
 module.exports = List;

@@ -35,6 +35,20 @@ body
   color: font_color
   height: 100%
   width: 100%
+  .search
+    display: none
+    position: absolute
+    top 45px
+    left: 17px
+    padding: 10px
+    background: #E2E4E6
+    width: 400px
+    li
+      margin-top: 10px
+      padding: 10px
+      background: #fff
+      border-radius: 4px
+      box-shadow: 0px 1px 1px #ccc
   #main
     width: 100%
     padding: 20px
@@ -104,44 +118,11 @@ body
     padding: 0 10px 0 10px
     .sort_placeholder
       background: #ccc
+      margin-bottom: 8px
+      border-radius: 4px
   h2
     font-size: 16px
     padding: 10px
-  li.card
-    padding: 10px
-    background: #fff
-    box-sizing: border-box
-    margin-bottom: 8px
-    border-radius: 4px
-    box-shadow: 0px 1px 1px #ccc
-    cursor: pointer
-    position: relative
-    .info
-      span
-        margin-top: 10px
-        display: inline-block
-        padding: 0 5px
-        color: #bbb
-        vertical-align: middle
-        &.date
-          border-radius: 3px
-          color: #fff
-          margin-right: 10px
-          i
-            margin-right: 5px
-    & > span.fa-pencil
-      position: absolute
-      top: 5px
-      right: 5px
-      padding: 5px 8px
-      border-radius: 4px
-      visibility: hidden
-      &:hover
-        background: #e0e0e0
-    &:hover
-      background: #eee
-      span
-        visibility: visible
   a
     display: block
     color: #888
@@ -149,6 +130,44 @@ body
     border-radius: inherit
     &:hover
       background: #CDD2D4
+
+// Card Styles
+li.card
+  padding: 10px
+  background: #fff
+  box-sizing: border-box
+  margin-bottom: 8px
+  border-radius: 4px
+  box-shadow: 0px 1px 1px #ccc
+  cursor: pointer
+  position: relative
+  .info
+    span
+      margin-top: 10px
+      display: inline-block
+      padding: 0 5px
+      color: #bbb
+      vertical-align: middle
+      &.date
+        border-radius: 3px
+        color: #fff
+        margin-right: 10px
+        i
+          margin-right: 5px
+  & > span.fa-pencil
+    position: absolute
+    top: 5px
+    right: 5px
+    padding: 5px 8px
+    border-radius: 4px
+    visibility: hidden
+    &:hover
+      background: #e0e0e0
+  &:hover
+    background: #eee
+    span
+      visibility: visible
+
 .placeholder
   background: #ccc
 
@@ -177,7 +196,7 @@ body
     width: 180px
     border: none
     margin-left: 10px
-    &::placeholder
+    &::-webkit-input-placeholder
       color: #fff
   .button
     font-weight: bold
@@ -497,6 +516,7 @@ option
   cursor: default
 
 .ui-sortable-placeholder
+  border-radius: 4px
   background: #ccc
 .ui-sortable-helper
   transform: rotate(10deg)

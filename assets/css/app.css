@@ -12,6 +12,22 @@ body {
   height: 100%;
   width: 100%;
 }
+body .search {
+  display: none;
+  position: absolute;
+  top: 45px;
+  left: 17px;
+  padding: 10px;
+  background: #e2e4e6;
+  width: 400px;
+}
+body .search li {
+  margin-top: 10px;
+  padding: 10px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0px 1px 1px #ccc;
+}
 body #main {
   width: 100%;
   padding: 20px;
@@ -113,52 +129,12 @@ body a {
 }
 .list ul .sort_placeholder {
   background: #ccc;
+  margin-bottom: 8px;
+  border-radius: 4px;
 }
 .list h2 {
   font-size: 16px;
   padding: 10px;
-}
-.list li.card {
-  padding: 10px;
-  background: #fff;
-  box-sizing: border-box;
-  margin-bottom: 8px;
-  border-radius: 4px;
-  box-shadow: 0px 1px 1px #ccc;
-  cursor: pointer;
-  position: relative;
-}
-.list li.card .info span {
-  margin-top: 10px;
-  display: inline-block;
-  padding: 0 5px;
-  color: #bbb;
-  vertical-align: middle;
-}
-.list li.card .info span.date {
-  border-radius: 3px;
-  color: #fff;
-  margin-right: 10px;
-}
-.list li.card .info span.date i {
-  margin-right: 5px;
-}
-.list li.card > span.fa-pencil {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  padding: 5px 8px;
-  border-radius: 4px;
-  visibility: hidden;
-}
-.list li.card > span.fa-pencil:hover {
-  background: #e0e0e0;
-}
-.list li.card:hover {
-  background: #eee;
-}
-.list li.card:hover span {
-  visibility: visible;
 }
 .list a {
   display: block;
@@ -168,6 +144,48 @@ body a {
 }
 .list a:hover {
   background: #cdd2d4;
+}
+li.card {
+  padding: 10px;
+  background: #fff;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  box-shadow: 0px 1px 1px #ccc;
+  cursor: pointer;
+  position: relative;
+}
+li.card .info span {
+  margin-top: 10px;
+  display: inline-block;
+  padding: 0 5px;
+  color: #bbb;
+  vertical-align: middle;
+}
+li.card .info span.date {
+  border-radius: 3px;
+  color: #fff;
+  margin-right: 10px;
+}
+li.card .info span.date i {
+  margin-right: 5px;
+}
+li.card > span.fa-pencil {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  visibility: hidden;
+}
+li.card > span.fa-pencil:hover {
+  background: #e0e0e0;
+}
+li.card:hover {
+  background: #eee;
+}
+li.card:hover span {
+  visibility: visible;
 }
 .placeholder {
   background: #ccc;
@@ -200,7 +218,7 @@ body a {
   border: none;
   margin-left: 10px;
 }
-#header #search::placeholder {
+#header #search::-webkit-input-placeholder {
   color: #fff;
 }
 #header .button {
@@ -632,6 +650,7 @@ option {
   cursor: default;
 }
 .ui-sortable-placeholder {
+  border-radius: 4px;
   background: #ccc;
 }
 .ui-sortable-helper {

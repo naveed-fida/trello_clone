@@ -35,6 +35,7 @@ let NewListView = Backbone.View.extend({
     e.stopPropagation();
     $('input.edit_list:visible').closest('.list').trigger('close_edit');
     $('.new_card:visible').closest('.list').trigger('close_new');
+    $('.search_wrapper').trigger('hide');
   },
 
   handleSave(e) {

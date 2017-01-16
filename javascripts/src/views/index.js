@@ -55,6 +55,7 @@ let IndexView = Backbone.View.extend({
     $('input.edit_list:visible').closest('.list').trigger('close_edit');
     $('.new_card:visible').closest('.list').trigger('close_new');
     $('.form:visible').closest('.new_list').trigger('close_form');
+    $('.search_wrapper').trigger('hide');
   }
 });
 
